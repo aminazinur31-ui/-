@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Legal Assistance Bot</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>LegalAI</h2>
+            </div>
+            <nav class="history">
+                <p class="section-title">История консультаций</p>
+                <div class="history-item active">Трудовой договор</div>
+                <div class="history-item">Регистрация ИП</div>
+                <div class="history-item">Налоговый вычет</div>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar"></div>
+                <span>Личный кабинет</span>
+            </div>
+        </aside>
+
+        <main class="chat-area">
+            <header class="chat-header">
+                <h3>Юридический помощник</h3>
+                <span class="status">В сети</span>
+            </header>
+
+            <div class="messages-container" id="chatBox">
+                <div class="message bot-message">
+                    Здравствуйте! Я ваш ИИ-юрист. Чем я могу помочь вам сегодня?
+                </div>
+                <div class="message user-message">
+                    Как составить договор аренды квартиры?
+                </div>
+            </div>
+
+            <footer class="input-area">
+                <div class="input-wrapper">
+                    <input type="text" placeholder="Введите ваш юридический вопрос...">
+                    <button class="send-btn">Отправить</button>
+                </div>
+                <p class="disclaimer">ИИ может совершать ошибки. Проверяйте важную информацию.</p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>
