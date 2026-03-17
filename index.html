@@ -3,68 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LegalAI — Защита прав</title>
-    <link rel="stylesheet" href="style.css">
+    <title>LegalAI — Защитите свои права</title>
+    <style>
+        /* === СТИЛИ (CSS) === */
+        :root {
+            --bg: #030712;
+            --sidebar: rgba(10, 15, 30, 0.8);
+            --accent-blue: #6ee7ff;
+            --text-main: #ffffff;
+            --text-dim: #9ca3af;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', system-ui, sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Боковое меню */
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        .logo { 
+            font-weight: 900; 
+            font-size: 22px; 
+            margin-bottom: 40px; 
+            letter-spacing: -1px;
+            color: var(--text-main);
+        }
+
+        .nav-label { 
+            font-size: 11px; 
+            text-transform: uppercase; 
+            color: var(--text-dim); 
+            margin-bottom: 15px; 
+            font-weight: 700; 
+        }
+
+        .history-item {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: var(--text-dim);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+        .history-item:hover { border-color: var(--border); color: #fff; }
+
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at 50% 20%, rgba(110, 231, 255, 0.1), transparent 50%);
+        }
+
+        header {
+            position: absolute;
+            top: 25px;
+            right: 40px;
+        }
+
+        .btn-account {
+            padding: 10px 22px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-account:hover { background: white; color: black; }
+
+        /* Заголовок (стиль Halo/Securify) */
+        h1 {
+            font-size: clamp(40px, 8vw, 75px);
+            font-weight: 900;
+            line-height: 0.9;
+            text-align: center;
+            margin-bottom: 45px;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to bottom, #fff 60%, rgba(255,255,255,0.4));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Поле чата */
+        .chat-window {
+            width: 90%;
+            max-width: 750px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 35px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+        }
+
+        #typing-text {
+            font-size: 19px;
+            line-height: 1.6;
+            color: #e5e7eb;
+            min-height: 80px;
+            margin-bottom: 30px;
+        }
+
+        /* Кнопка действия */
+        .btn-action {
+            background: #ffffff;
+            color: #030712;
+            padding: 18px 35px;
+            border-radius: 15px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            float: right;
+            transition: 0.2s;
+            font-size: 16px;
+        }
+        .btn-action:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
+
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            h1 { font-size: 45px; }
+        }
+    </style>
 </head>
 <body>
 
     <aside class="sidebar">
         <div class="logo">LegalAI</div>
-        <div class="history-label">История запросов</div>
-        <div class="history-item">Отказ в возврате услуги</div>
-        <div class="history-item">Брак электроники</div>
-        <div class="history-item">Спор по подписке</div>
+        <div class="nav-label">История запросов</div>
+        <div class="history-item">Отказ в возврате денег</div>
+        <div class="history-item">Претензия к магазину</div>
+        <div class="history-item">Спор по договору</div>
     </aside>
 
     <main class="main-content">
-        <div class="glow-orb"></div>
-        
         <header>
             <button class="btn-account">Личный кабинет</button>
         </header>
 
-        <section class="hero">
-            <h1>защитите свои <br> права за 3 минуты.</h1>
+        <h1>защитите свои <br> права за 3 минуты.</h1>
+
+        <div class="chat-window">
+            <div id="typing-text"></div>
             
-            <div class="chat-container">
-                <div class="chat-prompt" id="typing-text"></div>
-                
-                <div class="action-row">
-                    <div class="features-pill">
-                        <span class="pill">Анализ ситуации</span>
-                        <span class="pill">Генерация претензии</span>
-                    </div>
-                    <button class="btn-query" id="main-btn">Получить решение →</button>
-                </div>
-            </div>
-        </section>
+            <button class="btn-action" id="main-btn">Получить решение →</button>
+        </div>
     </main>
 
     <script>
-        const fullText = "Я оплатил услугу, но компания отказалась возвращать деньги после отмены. Помогите мне разобраться в этой ситуации как профессиональный юрист. Какие у меня есть права?";
-        const typingElement = document.getElementById("typing-text");
-        let i = 0;
+        const message = "Я оплатил услугу, но компания отказалась возвращать деньги после отмены. Помогите мне разобраться в этой ситуации как профессиональный юрист. Какие у меня есть права?";
+        const display = document.getElementById("typing-text");
+        let charIndex = 0;
 
-        function typeWriter() {
-            if (i < fullText.length) {
-                typingElement.innerHTML += fullText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 30); // Скорость печати
+        // Эффект печати (как на твоем скриншоте)
+        function typeEffect() {
+            if (charIndex < message.length) {
+                display.textContent += message.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeEffect, 30); // Скорость печати
             }
         }
 
         // Запуск при загрузке
-        window.onload = function() {
-            typingElement.innerHTML = "";
-            setTimeout(typeWriter, 500);
+        window.onload = () => {
+            display.textContent = "";
+            setTimeout(typeEffect, 600);
         };
 
-        // Логика кнопки
+        // Обработка кнопки
         document.getElementById('main-btn').onclick = function() {
             this.innerText = 'Анализирую...';
-            this.style.opacity = '0.7';
+            this.style.opacity = '0.6';
+            
             setTimeout(() => {
-                alert('ИИ-юрист сформировал план действий!');
+                alert('ИИ-юрист сформировал стратегию защиты! Данные отправлены в личный кабинет.');
                 this.innerText = 'Получить решение →';
                 this.style.opacity = '1';
             }, 2000);
