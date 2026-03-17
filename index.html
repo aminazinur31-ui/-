@@ -3,33 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LegalAI — Premium Justice</title>
+    <title>LegalAI — Защита прав</title>
 
     <script type="text/javascript">
        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
        m[i].l=1*new Date();
        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-       })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=107161272', 'ym');
+       })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=107738375', 'ym');
 
-       ym(107161272, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+       ym(107738375, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/107161272" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript><div><img src="https://mc.yandex.ru/watch/107738375" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <style>
         :root {
             --bg: #000000;
-            --card: #0a0a0a;
+            --sidebar: #050505;
             --accent: #ffffff;
-            --border: rgba(255, 255, 255, 0.1);
-            --text-gray: #666666;
+            --border: rgba(255, 255, 255, 0.08);
+            --gray: #666666;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             background-color: var(--bg);
             color: #fff;
-            font-family: -apple-system, system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             display: flex;
             height: 100vh;
             overflow: hidden;
@@ -38,186 +38,138 @@
         /* SIDEBAR */
         .sidebar {
             width: 260px;
+            background: var(--sidebar);
             border-right: 1px solid var(--border);
+            padding: 40px 24px;
             display: flex;
             flex-direction: column;
-            padding: 40px 24px;
-            background: #000;
         }
 
-        .logo {
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: 60px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .logo { font-weight: 800; font-size: 18px; margin-bottom: 50px; display: flex; align-items: center; gap: 8px; }
+        .logo-box { width: 12px; height: 12px; background: #fff; border-radius: 2px; }
 
-        .logo-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+        .menu-label { font-size: 10px; color: var(--gray); font-weight: 700; letter-spacing: 1px; margin-bottom: 20px; }
+        .nav-item { color: #888; font-size: 13px; margin-bottom: 12px; cursor: pointer; transition: 0.2s; }
+        .nav-item:hover { color: #fff; }
 
-        .menu-label { font-size: 10px; color: var(--text-gray); font-weight: 700; letter-spacing: 1.5px; margin-bottom: 20px; text-transform: uppercase; }
-
-        .nav-link {
-            font-size: 13px;
-            color: #999;
-            padding: 10px 0;
-            cursor: pointer;
-            transition: 0.2s;
-            display: block;
-        }
-        .nav-link:hover { color: #fff; }
-
-        /* MAIN VIEWPORT */
-        .viewport {
+        /* MAIN AREA */
+        .main {
             flex: 1;
-            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 60px;
-            background: radial-gradient(circle at top right, #111, transparent);
+            position: relative;
+            background: radial-gradient(circle at top right, #111111, transparent);
         }
 
-        .top-bar {
-            position: absolute;
-            top: 40px;
-            right: 60px;
+        .top-btn { position: absolute; top: 30px; right: 40px; }
+        .btn-outline {
+            background: transparent; border: 1px solid var(--border); color: #fff;
+            padding: 8px 20px; border-radius: 100px; font-size: 12px; cursor: pointer;
         }
 
-        .btn-ghost {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: #fff;
-            padding: 10px 24px;
-            border-radius: 100px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* TYPOGRAPHY */
-        .hero-title {
-            font-size: clamp(40px, 8vw, 72px);
+        h1 {
+            font-size: clamp(40px, 8vw, 75px);
             font-weight: 900;
-            letter-spacing: -0.06em;
+            letter-spacing: -0.05em;
             line-height: 0.85;
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             text-transform: lowercase;
         }
 
         /* CHAT INTERFACE */
-        .chat-wrap {
-            width: 100%;
-            max-width: 680px;
-            background: var(--card);
+        .chat-container {
+            width: 90%;
+            max-width: 650px;
+            background: #080808;
             border: 1px solid var(--border);
             border-radius: 20px;
             padding: 40px;
         }
 
-        #typing-area {
+        #typing-box {
             font-size: 18px;
             line-height: 1.6;
-            color: #fff;
             min-height: 100px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            color: #efefef;
         }
+        
+        #typing-box::after { content: '_'; animation: cursor 1s infinite; color: var(--accent); }
 
-        #typing-area::after {
-            content: '_';
-            animation: blink 1s infinite;
-            color: var(--accent);
+        .chat-actions { display: flex; justify-content: space-between; align-items: center; }
+        .status-tag { font-size: 10px; color: var(--gray); font-weight: 700; }
+
+        .btn-white {
+            background: #fff; color: #000; border: none; padding: 14px 30px;
+            border-radius: 12px; font-weight: 800; font-size: 14px; cursor: pointer; transition: 0.2s;
         }
+        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
 
-        .chat-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        @keyframes cursor { 50% { opacity: 0; } }
 
-        .btn-main {
-            background: #fff;
-            color: #000;
-            border: none;
-            padding: 16px 36px;
-            border-radius: 12px;
-            font-weight: 800;
-            font-size: 15px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
-
-        @keyframes blink { 50% { opacity: 0; } }
-
-        @media (max-width: 800px) {
-            .sidebar { display: none; }
-            .hero-title { font-size: 48px; }
-        }
+        @media (max-width: 800px) { .sidebar { display: none; } h1 { font-size: 45px; } }
     </style>
 </head>
 <body>
 
     <aside class="sidebar">
-        <div class="logo"><div class="logo-dot"></div> LegalAI</div>
-        <div class="menu-label">История</div>
-        <div class="nav-link">Отказ в возврате</div>
-        <div class="nav-link">Брак электроники</div>
-        <div style="margin-top: auto; color: #fff; font-size: 13px; cursor: pointer;">+ Новый запрос</div>
+        <div class="logo"><div class="logo-box"></div> LegalAI</div>
+        <div class="menu-label">HISTORY</div>
+        <div class="nav-item">Возврат билетов</div>
+        <div class="nav-item">Претензия к маркетплейсу</div>
+        <div style="margin-top: auto; color: #fff; font-size: 12px;">+ New Request</div>
     </aside>
 
-    <main class="viewport">
-        <div class="top-bar">
-            <button class="btn-ghost">Личный кабинет</button>
-        </div>
+    <main class="main">
+        <div class="top-btn"><button class="btn-outline">Account</button></div>
+        
+        <h1>защитите свои <br> права за 3 минуты.</h1>
 
-        <h1 class="hero-title">защитите свои <br> права за 3 минуты.</h1>
-
-        <div class="chat-wrap">
-            <div id="typing-area"></div>
-            <div class="chat-footer">
-                <div style="color: var(--text-gray); font-size: 11px; font-weight: 600;">METRIKA ACTIVE: ID 107161272</div>
-                <button class="btn-main" id="startBtn">ПОЛУЧИТЬ РЕШЕНИЕ</button>
+        <div class="chat-container">
+            <div id="typing-box"></div>
+            <div class="chat-actions">
+                <div class="status-tag">YANDEX METRIKA: 107738375</div>
+                <button class="btn-white" id="solve-btn">ПОЛУЧИТЬ РЕШЕНИЕ</button>
             </div>
         </div>
     </main>
 
     <script>
-        const promptText = "Я оплатил услугу, но компания отказалась возвращать деньги после отмены. Помогите мне разобраться в этой ситуации как профессиональный юрист. Какие у меня есть права?";
-        const box = document.getElementById("typing-area");
+        const phrase = "Я оплатил услугу, но компания отказалась возвращать деньги после отмены. Помогите мне разобраться в этой ситуации как профессиональный юрист. Какие у меня есть права?";
+        const box = document.getElementById("typing-box");
         let i = 0;
 
-        function typing() {
-            if (i < promptText.length) {
-                box.textContent += promptText.charAt(i);
+        function type() {
+            if (i < phrase.length) {
+                box.textContent += phrase.charAt(i);
                 i++;
-                setTimeout(typing, 30);
+                setTimeout(type, 30);
             }
         }
 
         window.onload = () => {
             box.textContent = "";
-            setTimeout(typing, 1000);
+            setTimeout(type, 1000);
         };
 
-        // КЛИК С ОТПРАВКОЙ ЦЕЛИ В ЯНДЕКС
-        document.getElementById('startBtn').onclick = function() {
-            // Отправляем цель "клик" в Метрику
-            if(typeof ym !== "undefined") {
-                ym(107161272, 'reachGoal', 'get_solution');
+        // Логика кнопки + цель Метрики
+        document.getElementById('solve-btn').onclick = function() {
+            // Отправка цели в Метрику (ID обновлен)
+            if (typeof ym !== 'undefined') {
+                ym(107738375, 'reachGoal', 'get_solution');
             }
 
-            this.textContent = "АНАЛИЗ...";
+            this.textContent = "АНАЛИЗИРУЮ...";
             this.style.opacity = "0.5";
+            
             setTimeout(() => {
-                alert("Юридический отчет готов. Переходим в личный кабинет.");
+                alert("Анализ завершен. Результаты в Личном Кабинете.");
                 this.textContent = "ПОЛУЧИТЬ РЕШЕНИЕ";
                 this.style.opacity = "1";
-            }, 1500);
+            }, 1800);
         };
     </script>
 </body>
