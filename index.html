@@ -228,5 +228,26 @@
             }, 1500);
         }
     </script>
+    const text = "Я оплатил услугу, но компания отказалась возвращать деньги после отмены. Помогите мне разобраться в этой ситуации как профессиональный юрист. Какие у меня есть права?";
+const typingElement = document.getElementById("typing-text");
+let index = 0;
+
+function typeEffect() {
+    if (index < text.length) {
+        typingElement.textContent += text.charAt(index);
+        index++;
+        // Случайная задержка для эффекта "человеческого" набора
+        setTimeout(typeEffect, Math.random() * 30 + 20); 
+    } else {
+        // Убираем мигающий курсор после завершения печати
+        typingElement.style.borderRight = "none";
+    }
+}
+
+// Запуск анимации после загрузки страницы
+window.onload = () => {
+    typingElement.textContent = ""; // Очищаем поле перед началом
+    setTimeout(typeEffect, 1000); // Небольшая пауза перед стартом
+};
 </body>
 </html>
