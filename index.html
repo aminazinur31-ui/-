@@ -3,51 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Legal Assistance Bot</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>LegalAI — Защитите свои права</title>
+    <style>
+        :root {
+            --bg: #030712;
+            --sidebar: rgba(16, 26, 47, 0.6);
+            --card: rgba(255, 255, 255, 0.03);
+            --primary: #ffffff;
+            --accent: #6ee7ff;
+            --text-muted: #9ca3af;
+            --line: rgba(255, 255, 255, 0.08);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; }
+
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            z-index: 10;
+        }
+
+        .logo { font-weight: 900; font-size: 22px; margin-bottom: 40px; letter-spacing: -1px; }
+
+        .history-label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; font-weight: 700; }
+
+        .history-item {
+            padding: 12px;
+            border-radius: 12px;
+            background: var(--card);
+            margin-bottom: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: 0.2s;
+            color: var(--text-muted);
+        }
+
+        .history-item:hover { border-color: var(--line); color: #fff; }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            flex: 1;
+            position: relative;
+            overflow-y: auto;
+            background: radial-gradient(circle at 50% -20%, rgba(110,231,255,0.1), transparent 50%);
+        }
+
+        header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 24px 40px;
+        }
+
+        .btn-account {
+            padding: 10px 20px;
+            border-radius: 99px;
+            border: 1px solid var(--line);
+            background: transparent;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-account:hover { background: #fff; color: #000; }
+
+        /* --- HERO AREA --- */
+        .hero {
+            max-width: 900px;
+            margin: 60px auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: clamp(40px, 8vw, 80px);
+            line-height: 0.9;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            margin-bottom: 40px;
+            background: linear-gradient(to bottom, #fff 60%, rgba(255,255,255,0.4));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- CHAT BOX --- */
+        .chat-container {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 32px;
+            backdrop-filter: blur(10px);
+            text-align: left;
+            position: relative;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+        }
+
+        .chat-prompt {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #e5e7eb;
+            margin-bottom: 30px;
+            min-height: 100px;
+        }
+
+        .action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-query {
+            background: var(--primary);
+            color: #000;
+            padding: 16px 32px;
+            border-radius: 14px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 16px;
+        }
+
+        .btn-query:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+        }
+
+        .features-pill {
+            display: flex;
+            gap: 12px;
+        }
+
+        .pill {
+            font-size: 12px;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border: 1px solid var(--line);
+            border-radius: 99px;
+        }
+
+        /* Анимация свечения */
+        .glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(167,139,250,0.1) 0%, transparent 70%);
+            bottom: -150px;
+            right: -100px;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            h1 { font-size: 48px; }
+        }
+    </style>
 </head>
 <body>
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="logo">
-                <h2>LegalAI</h2>
-            </div>
-            <nav class="history">
-                <p class="section-title">История консультаций</p>
-                <div class="history-item active">Трудовой договор</div>
-                <div class="history-item">Регистрация ИП</div>
-                <div class="history-item">Налоговый вычет</div>
-            </nav>
-            <div class="user-profile">
-                <div class="avatar"></div>
-                <span>Личный кабинет</span>
-            </div>
-        </aside>
 
-        <main class="chat-area">
-            <header class="chat-header">
-                <h3>Юридический помощник</h3>
-                <span class="status">В сети</span>
-            </header>
+    <aside class="sidebar">
+        <div class="logo">LegalAI</div>
+        
+        <div class="history-label">История запросов</div>
+        <div class="history-item">Отказ в возврате услуги</div>
+        <div class="history-item">Брак электроники</div>
+        <div class="history-item">Спор по подписке</div>
+        <div class="history-item">Задержка рейса</div>
+        
+        <div style="margin-top: auto;">
+            <div class="history-item" style="border: 1px dashed var(--line);">+ Новый чат</div>
+        </div>
+    </aside>
 
-            <div class="messages-container" id="chatBox">
-                <div class="message bot-message">
-                    Здравствуйте! Я ваш ИИ-юрист. Чем я могу помочь вам сегодня?
+    <main class="main-content">
+        <header>
+            <button class="btn-account">Личный кабинет</button>
+        </header>
+
+        <section class="hero">
+            <h1>защитите свои <br> права за 3 минуты.</h1>
+            
+            <div class="chat-container">
+                <div class="glow"></div>
+                <div class="chat-prompt" id="typing-text">
+                    Я оплатил услугу, но компания отказалась возвращать деньги после отмены. Помогите мне разобраться в этой ситуации как профессиональный юрист. Какие у меня есть права?
                 </div>
-                <div class="message user-message">
-                    Как составить договор аренды квартиры?
+                
+                <div class="action-row">
+                    <div class="features-pill">
+                        <span class="pill">Анализ ситуации</span>
+                        <span class="pill">Генерация претензии</span>
+                    </div>
+                    <button class="btn-query" onclick="startAnalysis()">Получить решение →</button>
                 </div>
             </div>
+        </section>
+    </main>
 
-            <footer class="input-area">
-                <div class="input-wrapper">
-                    <input type="text" placeholder="Введите ваш юридический вопрос...">
-                    <button class="send-btn">Отправить</button>
-                </div>
-                <p class="disclaimer">ИИ может совершать ошибки. Проверяйте важную информацию.</p>
-            </footer>
-        </main>
-    </div>
+    <script>
+        function startAnalysis() {
+            const btn = document.querySelector('.btn-query');
+            btn.innerText = 'Анализирую...';
+            btn.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                alert('ИИ-юрист подготовил пошаговый план и проект претензии. Переходим в личный кабинет для скачивания PDF.');
+                btn.innerText = 'Получить решение →';
+                btn.style.opacity = '1';
+            }, 1500);
+        }
+    </script>
 </body>
 </html>
