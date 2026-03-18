@@ -1,176 +1,1215 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LegalAI — Защита прав</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Юрист</title>
+  <meta
+    name="description"
+    content="AI-юрист для защиты прав потребителей"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <script type="text/javascript">
-       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-       m[i].l=1*new Date();
-       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-       })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=107738375', 'ym');
+  <style>
+    :root {
+      --bg: #030303;
+      --bg-soft: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --text: #f5f7fb;
+      --muted: rgba(255,255,255,0.62);
+      --muted-2: rgba(255,255,255,0.38);
+      --accent: #8cc3ff;
+      --accent-2: #4ea1ff;
+      --white: #ffffff;
+      --shadow: 0 20px 80px rgba(0,0,0,0.35);
+      --radius: 24px;
+      --container: 1280px;
+    }
 
-       ym(107738375, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/107738375" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <style>
-        :root {
-            --bg: #000000;
-            --sidebar: #050505;
-            --accent: #ffffff;
-            --border: rgba(255, 255, 255, 0.08);
-            --gray: #666666;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            background-color: var(--bg);
-            color: #fff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        /* SIDEBAR */
-        .sidebar {
-            width: 260px;
-            background: var(--sidebar);
-            border-right: 1px solid var(--border);
-            padding: 40px 24px;
-            display: flex;
-            flex-direction: column;
-        }
+    body {
+      font-family: "Inter", sans-serif;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(106, 181, 255, 0.32), transparent 20%),
+        radial-gradient(circle at 82% 22%, rgba(61, 143, 255, 0.24), transparent 18%),
+        radial-gradient(circle at 74% 68%, rgba(84, 162, 255, 0.18), transparent 18%),
+        radial-gradient(circle at 28% 72%, rgba(106, 181, 255, 0.2), transparent 20%),
+        #030303;
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-        .logo { font-weight: 800; font-size: 18px; margin-bottom: 50px; display: flex; align-items: center; gap: 8px; }
-        .logo-box { width: 12px; height: 12px; background: #fff; border-radius: 2px; }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      backdrop-filter: blur(70px);
+      pointer-events: none;
+      z-index: -1;
+    }
 
-        .menu-label { font-size: 10px; color: var(--gray); font-weight: 700; letter-spacing: 1px; margin-bottom: 20px; }
-        .nav-item { color: #888; font-size: 13px; margin-bottom: 12px; cursor: pointer; transition: 0.2s; }
-        .nav-item:hover { color: #fff; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        /* MAIN AREA */
-        .main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: radial-gradient(circle at top right, #111111, transparent);
-        }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-        .top-btn { position: absolute; top: 30px; right: 40px; }
-        .btn-outline {
-            background: transparent; border: 1px solid var(--border); color: #fff;
-            padding: 8px 20px; border-radius: 100px; font-size: 12px; cursor: pointer;
-        }
+    .container {
+      width: min(92%, var(--container));
+      margin: 0 auto;
+    }
 
-        h1 {
-            font-size: clamp(40px, 8vw, 75px);
-            font-weight: 900;
-            letter-spacing: -0.05em;
-            line-height: 0.85;
-            text-align: center;
-            margin-bottom: 50px;
-            text-transform: lowercase;
-        }
+    .section {
+      padding: 110px 0;
+      position: relative;
+    }
 
-        /* CHAT INTERFACE */
-        .chat-container {
-            width: 90%;
-            max-width: 650px;
-            background: #080808;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px;
-        }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
 
-        #typing-box {
-            font-size: 18px;
-            line-height: 1.6;
-            min-height: 100px;
-            margin-bottom: 30px;
-            color: #efefef;
-        }
-        
-        #typing-box::after { content: '_'; animation: cursor 1s infinite; color: var(--accent); }
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: rgba(255,255,255,0.2);
+      display: inline-block;
+    }
 
-        .chat-actions { display: flex; justify-content: space-between; align-items: center; }
-        .status-tag { font-size: 10px; color: var(--gray); font-weight: 700; }
+    .section-title {
+      font-size: clamp(42px, 6vw, 86px);
+      line-height: 0.98;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      max-width: 1050px;
+      margin-bottom: 18px;
+    }
 
-        .btn-white {
-            background: #fff; color: #000; border: none; padding: 14px 30px;
-            border-radius: 12px; font-weight: 800; font-size: 14px; cursor: pointer; transition: 0.2s;
-        }
-        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
+    .section-text {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.65;
+    }
 
-        @keyframes cursor { 50% { opacity: 0; } }
+    /* nav */
+    .site-header {
+      position: fixed;
+      top: 18px;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
 
-        @media (max-width: 800px) { .sidebar { display: none; } h1 { font-size: 45px; } }
-    </style>
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(16px);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-center a {
+      padding: 10px 16px;
+      font-size: 13px;
+      color: var(--muted);
+      border-radius: 999px;
+      transition: 0.25s ease;
+    }
+
+    .nav-center a:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--white);
+    }
+
+    .nav-cta {
+      padding: 12px 18px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--white);
+      backdrop-filter: blur(14px);
+      transition: 0.25s ease;
+    }
+
+    .nav-cta:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .burger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: white;
+      font-size: 18px;
+    }
+
+    /* hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 150px 0 90px;
+      position: relative;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(60px);
+      z-index: -1;
+    }
+
+    .hero::before {
+      width: 420px;
+      height: 420px;
+      background: rgba(104, 180, 255, 0.25);
+      top: 10%;
+      left: 8%;
+    }
+
+    .hero::after {
+      width: 380px;
+      height: 380px;
+      background: rgba(68, 148, 255, 0.18);
+      right: 12%;
+      bottom: 12%;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: clamp(58px, 10vw, 118px);
+      line-height: 0.92;
+      font-weight: 800;
+      letter-spacing: -0.07em;
+      margin-bottom: 22px;
+      max-width: 900px;
+    }
+
+    .hero-title .accent {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--white);
+      color: #050505;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      color: var(--white);
+      backdrop-filter: blur(12px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero-note {
+      color: var(--muted-2);
+      font-size: 13px;
+      max-width: 520px;
+    }
+
+    .hero-panel {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      backdrop-filter: blur(22px);
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      min-height: 460px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(100, 178, 255, 0.18);
+      filter: blur(60px);
+      top: -40px;
+      right: -40px;
+    }
+
+    .chat-window {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      height: 100%;
+      justify-content: center;
+    }
+
+    .message {
+      max-width: 95%;
+      padding: 16px 18px;
+      border-radius: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .message.ai {
+      align-self: flex-start;
+      background: rgba(140, 195, 255, 0.09);
+      border: 1px solid rgba(140, 195, 255, 0.16);
+    }
+
+    .message strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* statement */
+    .statement {
+      padding-top: 40px;
+    }
+
+    .statement-grid {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 20px;
+      align-items: end;
+    }
+
+    .statement-title {
+      font-size: clamp(38px, 5.6vw, 72px);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      font-weight: 700;
+      max-width: 900px;
+    }
+
+    .statement-title span {
+      color: var(--accent);
+    }
+
+    .statement-card {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      border-radius: 24px;
+      padding: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 56px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      border-radius: 26px;
+      padding: 24px;
+      min-height: 220px;
+      transition: 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: auto -60px -80px auto;
+      width: 180px;
+      height: 180px;
+      background: rgba(108, 184, 255, 0.08);
+      border-radius: 50%;
+      filter: blur(30px);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .card-number {
+      font-size: 13px;
+      color: var(--muted-2);
+      margin-bottom: 28px;
+    }
+
+    .card h3 {
+      font-size: 26px;
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
+      max-width: 260px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 320px;
+    }
+
+    /* process */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 56px;
+    }
+
+    .process-item {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      border-radius: 24px;
+      padding: 26px 22px;
+      min-height: 240px;
+    }
+
+    .process-num {
+      color: var(--accent);
+      font-size: 14px;
+      margin-bottom: 26px;
+      font-weight: 600;
+    }
+
+    .process-item h3 {
+      font-size: 26px;
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+
+    .process-item p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* examples */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 54px;
+    }
+
+    .example-card {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      border-radius: 28px;
+      padding: 28px;
+      min-height: 240px;
+    }
+
+    .example-card small {
+      display: inline-block;
+      margin-bottom: 16px;
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .example-card h3 {
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+    }
+
+    .example-card p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    /* faq */
+    .faq-wrap {
+      margin-top: 54px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: transparent;
+      color: var(--white);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px 0;
+      text-align: left;
+      font-size: clamp(20px, 2vw, 28px);
+      letter-spacing: -0.04em;
+      cursor: pointer;
+    }
+
+    .faq-question span:last-child {
+      color: var(--accent);
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 780px;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 220px;
+      padding-bottom: 24px;
+    }
+
+    /* contact */
+    .contact-box {
+      margin-top: 54px;
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 20px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      border-radius: 32px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-left,
+    .contact-right {
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .contact-left h3,
+    .contact-right h3 {
+      font-size: 34px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin-bottom: 18px;
+    }
+
+    .contact-right p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: var(--white);
+      border-radius: 18px;
+      padding: 15px 16px;
+      font-size: 15px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .contact-note {
+      font-size: 13px;
+      color: var(--muted-2);
+      line-height: 1.7;
+    }
+
+    .success-message {
+      display: none;
+      color: #cde6ff;
+      background: rgba(140, 195, 255, 0.1);
+      border: 1px solid rgba(140, 195, 255, 0.16);
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-size: 14px;
+    }
+
+    /* footer */
+    footer {
+      padding: 40px 0 50px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-wrap {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .footer-text {
+      max-width: 680px;
+      color: var(--muted-2);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* responsive */
+    @media (max-width: 1100px) {
+      .hero-content,
+      .statement-grid,
+      .contact-box,
+      .cards-grid,
+      .process-grid,
+      .examples-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-center,
+      .nav-cta {
+        display: none;
+      }
+
+      .burger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mobile-nav {
+        position: fixed;
+        top: 76px;
+        left: 4%;
+        right: 4%;
+        border: 1px solid var(--border);
+        background: rgba(0,0,0,0.92);
+        border-radius: 24px;
+        padding: 14px;
+        display: none;
+        flex-direction: column;
+        gap: 8px;
+        z-index: 999;
+        backdrop-filter: blur(16px);
+      }
+
+      .mobile-nav.show {
+        display: flex;
+      }
+
+      .mobile-nav a {
+        padding: 14px 16px;
+        border-radius: 16px;
+        color: var(--muted);
+      }
+
+      .mobile-nav a:hover {
+        background: rgba(255,255,255,0.06);
+        color: var(--white);
+      }
+
+      .section {
+        padding: 86px 0;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 130px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(94%, var(--container));
+      }
+
+      .hero-title {
+        font-size: 54px;
+      }
+
+      .section-title,
+      .statement-title {
+        font-size: 42px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .card h3,
+      .process-item h3,
+      .example-card h3,
+      .contact-left h3,
+      .contact-right h3 {
+        font-size: 24px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <aside class="sidebar">
-        <div class="logo"><div class="logo-box"></div> LegalAI</div>
-        <div class="menu-label">HISTORY</div>
-        <div class="nav-item">Возврат билетов</div>
-        <div class="nav-item">Претензия к маркетплейсу</div>
-        <div style="margin-top: auto; color: #fff; font-size: 12px;">+ New Request</div>
-    </aside>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#" class="logo">Право <span>AI</span></a>
 
-    <main class="main">
-        <div class="top-btn"><button class="btn-outline">Account</button></div>
-        
-        <h1>защитите свои <br> права за 3 минуты.</h1>
+      <nav class="nav-center">
+        <a href="#about">О нас</a>
+        <a href="#services">Услуги</a>
+        <a href="#process">Процесс</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Контакты</a>
+      </nav>
 
-        <div class="chat-container">
-            <div id="typing-box"></div>
-            <div class="chat-actions">
-                <div class="status-tag">YANDEX METRIKA: 107738375</div>
-                <button class="btn-white" id="solve-btn">ПОЛУЧИТЬ РЕШЕНИЕ</button>
-            </div>
+      <a href="#contact" class="nav-cta">Get legal template</a>
+
+      <button class="burger" id="burger">☰</button>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#about">О нас</a>
+      <a href="#services">Услуги</a>
+      <a href="#process">Процесс</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Контакты</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-content">
+        <div>
+          <div class="eyebrow">AI legal assistant</div>
+          <h1 class="hero-title">
+            AI <span class="accent">юрист</span><br>
+            для защиты прав.
+          </h1>
+          <p class="hero-subtitle">
+            Мы помогаем быстро разобрать спор с компанией, объясняем права
+            простым языком и подсказываем следующий юридический шаг.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#services" class="btn btn-primary">Our services</a>
+            <a href="#contact" class="btn btn-secondary">Contact us →</a>
+          </div>
+
+          <div class="hero-note">
+            Подходит для возврата денег, претензий, жалоб, некачественных услуг
+            и других потребительских споров.
+          </div>
         </div>
-    </main>
 
-    <script>
-        const phrase = "Я оплатил услугу, но компания отказалась возвращать деньги после отмены. Помогите мне разобраться в этой ситуации как профессиональный юрист. Какие у меня есть права?";
-        const box = document.getElementById("typing-box");
-        let i = 0;
+        <div class="hero-panel">
+          <div class="chat-window">
+            <div class="message user">
+              Я оплатил услугу, но компания отказалась возвращать деньги после отмены. Какие у меня есть права?
+            </div>
+            <div class="message ai">
+              <strong>AI analysis</strong>
+              Я помогу оценить ситуацию, понять, какие права могли быть нарушены,
+              и подготовить пошаговый план действий.
+            </div>
+            <div class="message ai">
+              <strong>Что вы получите</strong>
+              1. Анализ ситуации<br>
+              2. Объяснение ваших прав<br>
+              3. Шаблон претензии<br>
+              4. Список доказательств
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        function type() {
-            if (i < phrase.length) {
-                box.textContent += phrase.charAt(i);
-                i++;
-                setTimeout(type, 30);
-            }
+    <section class="section statement" id="about">
+      <div class="container statement-grid">
+        <h2 class="statement-title">
+          Мы создаём <span>умную</span> юридическую помощь
+          для обычных потребителей.
+        </h2>
+        <div class="statement-card">
+          Быстро. Понятно. Современно. Без перегруженного интерфейса и
+          сложных формулировок.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="eyebrow">What we do</div>
+        <h2 class="section-title">Что умеет сервис</h2>
+        <p class="section-text">
+          Минималистичный интерфейс, быстрый первичный анализ и понятные
+          юридические формулировки для пользователя.
+        </p>
+
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-number">01</div>
+            <h3>Анализ спора</h3>
+            <p>
+              Разбираем конфликт с продавцом, компанией или сервисом и выделяем
+              суть нарушения.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">02</div>
+            <h3>Объяснение прав</h3>
+            <p>
+              Переводим юридическую информацию на простой язык, чтобы человек
+              сразу понимал свою позицию.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">03</div>
+            <h3>Шаблон претензии</h3>
+            <p>
+              Помогаем подготовить текст обращения, жалобы, заявления или
+              требования о возврате денег.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">04</div>
+            <h3>План действий</h3>
+            <p>
+              Даём пошаговую инструкцию: что собрать, куда написать и что делать
+              дальше.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">05</div>
+            <h3>Проверка доказательств</h3>
+            <p>
+              Подсказываем, какие чеки, переписки, скриншоты и договоры усилят
+              вашу позицию.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">06</div>
+            <h3>Быстрый старт</h3>
+            <p>
+              Пользователь получает понятный ответ за минуты, без долгого
+              поиска информации по сайтам.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="container">
+        <div class="eyebrow">Process</div>
+        <h2 class="section-title">Как это работает</h2>
+        <p class="section-text">
+          Пользователь описывает проблему, а AI-юрист превращает её в понятный,
+          структурированный юридический ответ.
+        </p>
+
+        <div class="process-grid">
+          <div class="process-item">
+            <div class="process-num">Step 01</div>
+            <h3>Опишите проблему</h3>
+            <p>
+              Кратко расскажите, что произошло, когда возник спор и какая
+              компания участвует в ситуации.
+            </p>
+          </div>
+
+          <div class="process-item">
+            <div class="process-num">Step 02</div>
+            <h3>Получите анализ</h3>
+            <p>
+              Сервис оценивает ситуацию и показывает, какие права могли быть
+              нарушены.
+            </p>
+          </div>
+
+          <div class="process-item">
+            <div class="process-num">Step 03</div>
+            <h3>Узнайте действия</h3>
+            <p>
+              Вы получаете следующий шаг: претензия, жалоба, возврат, сбор
+              доказательств.
+            </p>
+          </div>
+
+          <div class="process-item">
+            <div class="process-num">Step 04</div>
+            <h3>Используйте шаблон</h3>
+            <p>
+              Система помогает сразу подготовить текст обращения в нужном стиле
+              и структуре.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="examples">
+      <div class="container">
+        <div class="eyebrow">Examples</div>
+        <h2 class="section-title">Примеры запросов</h2>
+        <p class="section-text">
+          Ниже — типовые запросы, с которыми пользователь может обратиться к
+          AI-юристу.
+        </p>
+
+        <div class="examples-grid">
+          <div class="example-card">
+            <small>Case 01</small>
+            <h3>Возврат денег</h3>
+            <p>
+              Я оплатил услугу, но компания отказалась возвращать деньги после
+              отмены. Какие у меня есть права и как лучше написать претензию?
+            </p>
+          </div>
+
+          <div class="example-card">
+            <small>Case 02</small>
+            <h3>Некачественный товар</h3>
+            <p>
+              Я купил товар с дефектом, но продавец не принимает возврат.
+              Подскажите, что делать и какие доказательства приложить.
+            </p>
+          </div>
+
+          <div class="example-card">
+            <small>Case 03</small>
+            <h3>Игнорирование жалобы</h3>
+            <p>
+              Компания не отвечает на мои сообщения и не реагирует на претензию.
+              Какие у меня есть следующие шаги?
+            </p>
+          </div>
+
+          <div class="example-card">
+            <small>Case 04</small>
+            <h3>Другая услуга</h3>
+            <p>
+              Мне обещали одну услугу, а по факту оказали другую. Могу ли я
+              требовать компенсацию или полный возврат?
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="eyebrow">FAQ</div>
+        <h2 class="section-title">Частые вопросы</h2>
+
+        <div class="faq-wrap">
+          <div class="faq-item active">
+            <button class="faq-question">
+              <span>Это настоящий юрист?</span>
+              <span>−</span>
+            </button>
+            <div class="faq-answer">
+              Нет. Это AI-помощник для первичного юридического анализа. Он не
+              заменяет консультацию лицензированного юриста, но помогает быстро
+              понять ситуацию и подготовиться.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Можно ли доверять ответам?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              Сервис полезен для ориентира, структуры и шаблонов. В сложных
+              спорах лучше дополнительно обращаться к специалисту.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Можно ли сгенерировать претензию?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              Да. На основе описания проблемы можно подготовить текст претензии,
+              жалобы или заявления.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Для каких споров это подходит?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              Лучше всего сервис подходит для потребительских споров: возврат
+              денег, дефекты товаров, проблемы с услугами, игнорирование
+              претензий.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="eyebrow">Contact</div>
+        <h2 class="section-title">Получить помощь</h2>
+        <p class="section-text">
+          Оставьте заявку или перенаправьте пользователя в Telegram. Такой
+          блок хорошо подходит для MVP.
+        </p>
+
+        <div class="contact-box">
+          <div class="contact-left">
+            <h3>Оставьте заявку</h3>
+
+            <form id="contactForm">
+              <input type="text" placeholder="Ваше имя" required>
+              <input type="text" placeholder="Telegram или номер телефона" required>
+
+              <select required>
+                <option value="">Категория проблемы</option>
+                <option>Возврат денег</option>
+                <option>Некачественный товар</option>
+                <option>Некачественная услуга</option>
+                <option>Претензия / жалоба</option>
+                <option>Другое</option>
+              </select>
+
+              <textarea placeholder="Опишите ситуацию..." required></textarea>
+
+              <button type="submit" class="btn btn-primary">Send request</button>
+
+              <div class="success-message" id="successMessage">
+                Спасибо. Форма в демо-версии пока не подключена к серверу.
+              </div>
+
+              <div class="contact-note">
+                Нажимая кнопку, пользователь соглашается с условиями использования
+                и политикой конфиденциальности.
+              </div>
+            </form>
+          </div>
+
+          <div class="contact-right">
+            <h3>Telegram и AI-чат</h3>
+            <p>
+              Для быстрого запуска можно оставить форму и кнопку перехода в
+              Telegram, а позже подключить реальный AI-чат.
+            </p>
+            <p>
+              В коде замени ссылку на свою:
+              <br><br>
+              <strong style="color:#fff;">https://t.me/your_username</strong>
+            </p>
+            <a href="https://t.me/your_username" class="btn btn-secondary" target="_blank">
+              Open Telegram →
+            </a>
+
+            <p style="margin-top:20px;">
+              Добавь дисклеймер: сервис носит информационный характер и не
+              заменяет профессиональную юридическую помощь.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <div class="footer-logo">Право AI</div>
+      <div class="footer-text">
+        AI-помощник по защите прав потребителей. Сервис носит информационный
+        характер и не заменяет консультацию лицензированного юриста.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById("burger");
+    const mobileNav = document.getElementById("mobileNav");
+
+    burger.addEventListener("click", () => {
+      mobileNav.classList.toggle("show");
+    });
+
+    document.querySelectorAll(".mobile-nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("show");
+      });
+    });
+
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    faqItems.forEach(item => {
+      const btn = item.querySelector(".faq-question");
+      const icon = btn.querySelector("span:last-child");
+
+      btn.addEventListener("click", () => {
+        const isActive = item.classList.contains("active");
+
+        faqItems.forEach(faq => {
+          faq.classList.remove("active");
+          faq.querySelector(".faq-question span:last-child").textContent = "+";
+        });
+
+        if (!isActive) {
+          item.classList.add("active");
+          icon.textContent = "−";
         }
+      });
+    });
 
-        window.onload = () => {
-            box.textContent = "";
-            setTimeout(type, 1000);
-        };
+    const form = document.getElementById("contactForm");
+    const successMessage = document.getElementById("successMessage");
 
-        // Логика кнопки + цель Метрики
-        document.getElementById('solve-btn').onclick = function() {
-            // Отправка цели в Метрику (ID обновлен)
-            if (typeof ym !== 'undefined') {
-                ym(107738375, 'reachGoal', 'get_solution');
-            }
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      successMessage.style.display = "block";
+      form.reset();
 
-            this.textContent = "АНАЛИЗИРУЮ...";
-            this.style.opacity = "0.5";
-            
-            setTimeout(() => {
-                alert("Анализ завершен. Результаты в Личном Кабинете.");
-                this.textContent = "ПОЛУЧИТЬ РЕШЕНИЕ";
-                this.style.opacity = "1";
-            }, 1800);
-        };
-    </script>
+      setTimeout(() => {
+        successMessage.style.display = "none";
+      }, 4000);
+    });
+  </script>
 </body>
 </html>
