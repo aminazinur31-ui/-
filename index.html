@@ -1240,14 +1240,47 @@
               <input type="text" placeholder="Ваше имя" required />
               <input type="text" placeholder="Telegram или номер телефона" required />
 
-              <select required>
-                <option value="">Категория проблемы</option>
-                <option>Возврат денег</option>
-                <option>Некачественный товар</option>
-                <option>Некачественная услуга</option>
-                <option>Претензия / жалоба</option>
-                <option>Другое</option>
-              </select>
+             <div class="category-grid">
+  <label class="category-card">
+    <input type="radio" name="category" value="refund" required />
+    <div class="category-content">
+      <span class="category-icon">💰</span>
+      <span>Возврат денег</span>
+    </div>
+  </label>
+
+  <label class="category-card">
+    <input type="radio" name="category" value="product" />
+    <div class="category-content">
+      <span class="category-icon">📦</span>
+      <span>Некачественный товар</span>
+    </div>
+  </label>
+
+  <label class="category-card">
+    <input type="radio" name="category" value="service" />
+    <div class="category-content">
+      <span class="category-icon">⚙️</span>
+      <span>Некачественная услуга</span>
+    </div>
+  </label>
+
+  <label class="category-card">
+    <input type="radio" name="category" value="complaint" />
+    <div class="category-content">
+      <span class="category-icon">📄</span>
+      <span>Жалоба / претензия</span>
+    </div>
+  </label>
+
+  <label class="category-card">
+    <input type="radio" name="category" value="other" />
+    <div class="category-content">
+      <span class="category-icon">✨</span>
+      <span>Другое</span>
+    </div>
+  </label>
+</div>
 
               <textarea placeholder="Опишите ситуацию..." required></textarea>
 
